@@ -49,7 +49,7 @@ function stiffness_matrix = calculateStiffnessMatrix(support_stiffness, mount_di
 k11 = support_stiffness(1);
 k12 = support_stiffness(n_mounts);
 k21 = 0;
-k22 = support_stiffness(n_mounts)*mount_distance(n_mounts);
+k22 = support_stiffness(n_mounts)*L;
 
 for i = 1:n_mounts-2
 
