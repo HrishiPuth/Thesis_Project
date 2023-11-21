@@ -266,11 +266,13 @@ endif
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%FINDING BENDING MOMENTS AT THE FLANGES%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if (length(block_length)>1) == true
-moment_left=0;
-moment_right=0;
 itr=0;
 for i=1:(length(block_length)-1) %makes a loop for each flange
   itr=itr+1;
+
+  moment_left=0;
+  moment_right=0;
+
   for j =1:length(block_length)  %loops through all the blocks and sums up moments on either side of the flange from the blocks
     if block_cg(j) < cumul_block(i) == true
       moment_left = moment_left+block_mass(j)*g_s*abs(block_cg(j)-cumul_block(i)); %adds moments on the left of the flange caused by the block weights
