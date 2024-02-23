@@ -1,4 +1,4 @@
-%% CURRENT LATEST VERSION (01/10/23)
+%% CURRENT LATEST VERSION (23/02/24)
 
 clc;
 clear;
@@ -383,27 +383,18 @@ for i=1:(length(block_length)-1) %makes a loop for each flange
   itr=itr+1;
   
   moment_left=0;
-  moment_right=0;
   
   for j =1:length(block_length)  %loops through all the blocks and sums up moments on either side of the flange from the blocks
     if block_cg(j) < cumul_block(i) == true
       moment_left = moment_left+block_mass(j)*g_s*abs(block_cg(j)-cumul_block(i)); %adds moments on the left of the flange caused by the block weights
     endif
 
-    if block_cg(j) < cumul_block(i) == false
-      moment_right = moment_right-block_mass(j)*g_s*abs(block_cg(j) - cumul_block(i));  %adds moments on the right of the flange caused by the block weights
-    endif
-  endfor
-
   for kk=1:length(mount_distance)
         if mount_distance(kk) < cumul_block(i) == true
           moment_left = moment_left-reaction_force(kk)*abs(mount_distance(kk)-cumul_block(i));  %adds moments on the left of the flange caused by the support reactions
         endif
-        if mount_distance(kk) > cumul_block(i) == true
-          moment_right = moment_right + reaction_force(kk)*abs(mount_distance(kk)-cumul_block(i)); %adds moments on the right of the flange caused by the support reactions
-        endif
   endfor
- flange_moments(i) = moment_left - moment_right; %takes the resultant moment from the two sides. it's subtraction here because different sign conventions were used on either side
+ flange_moments(i) = moment_left; %takes the resultant moment from the two sides. it's subtraction here because different sign conventions were used on either side
 endfor
 
 disp('The moments at the flanges respectively are:');
